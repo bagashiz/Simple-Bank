@@ -13,6 +13,7 @@ This is a simple bank application that is built using Golang, Postgresql, and Do
 - [Postgresql Docker Image](https://hub.docker.com/_/postgres)
 - [Golang Migrate](https://github.com/golang-migrate/migrate)
 - [SQLC](https://github.com/kyleconroy/sqlc)
+- [lib/pq](https://github.com/lib/pq)
 
 ## Learning and Reference Source
 
