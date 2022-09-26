@@ -14,6 +14,7 @@ This is a simple bank application that is built using Golang, Postgresql, and Do
 - [Golang Migrate](https://github.com/golang-migrate/migrate)
 - [SQLC](https://github.com/kyleconroy/sqlc)
 - [lib/pq](https://github.com/lib/pq)
+- [Gin Gonic](https://github.com/gin-gonic/gin)
 
 ## Learning and Reference Source
 
@@ -23,3 +24,4 @@ This is a simple bank application that is built using Golang, Postgresql, and Do
 - [Postgresql Documentation](https://www.postgresql.org/docs/current/)
 - [Golang Migrate Documentation](https://github.com/golang-migrate/migrate/tree/master/cmd/migrate)
 - [SQLC Documentation](https://docs.sqlc.dev/en/latest/)
+- [Gin Gonic Documentation](https://gin-gonic.com/docs/)
