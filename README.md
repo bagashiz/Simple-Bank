@@ -15,6 +15,7 @@ This is a simple bank application that is built using Golang, Postgresql, and Do
 - [SQLC](https://github.com/kyleconroy/sqlc)
 - [lib/pq](https://github.com/lib/pq)
 - [Gin Gonic](https://github.com/gin-gonic/gin)
+- [viper](https://github.com/spf13/viper)
 
 ## Learning and Reference Source
 
