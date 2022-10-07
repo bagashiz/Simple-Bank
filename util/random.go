@@ -14,8 +14,8 @@ func init() {
 }
 
 // RandomInt returns a random integer in the range [min, max].
-func RandomInt(min, max int) int {
-	return min + rand.Intn(max-min+1)
+func RandomInt(min, max int) int64 {
+	return int64(min + rand.Intn(max-min+1))
 }
 
 // RandomString returns a random string of the given length.
