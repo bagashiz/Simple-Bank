@@ -11,7 +11,7 @@ import (
 // createAccountRequest is the request body for createAccount API.
 type createAccountRequest struct {
 	Owner    string `json:"owner" binding:"required"`
-	Currency string `json:"currency" binding:"required,oneof=USD EUR"`
+	Currency string `json:"currency" binding:"required,currency"`
 }
 
 // createAccount creates a new account with a given owner and currency from the request.
