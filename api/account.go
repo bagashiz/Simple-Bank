@@ -8,15 +8,15 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-// CreateAccountRequest is the request body for createAccount API.
-type CreateAccountRequest struct {
+// createAccountRequest is the request body for createAccount API.
+type createAccountRequest struct {
 	Owner    string `json:"owner" binding:"required"`
 	Currency string `json:"currency" binding:"required,oneof=USD EUR"`
 }
 
-// CreateAccount creates a new account with a given owner and currency from the request.
+// createAccount creates a new account with a given owner and currency from the request.
 func (server *Server) createAccount(ctx *gin.Context) {
-	var req CreateAccountRequest
+	var req createAccountRequest
 	if err := ctx.ShouldBindJSON(&req); err != nil {
 		ctx.JSON(http.StatusBadRequest, errorReponse(err))
 		return
@@ -37,14 +37,14 @@ func (server *Server) createAccount(ctx *gin.Context) {
 	ctx.JSON(http.StatusOK, account)
 }
 
-// GetAccountRequest is the request body for getAccount API.
-type GetAccountRequest struct {
+// getAccountRequest is the request body for getAccount API.
+type getAccountRequest struct {
 	ID int64 `uri:"id" binding:"required,min=1"`
 }
 
 // getAccount gets the account info from the request.
 func (server *Server) getAccount(ctx *gin.Context) {
-	var req GetAccountRequest
+	var req getAccountRequest
 	if err := ctx.ShouldBindUri(&req); err != nil {
 		ctx.JSON(http.StatusBadRequest, errorReponse(err))
 		return
@@ -63,15 +63,15 @@ func (server *Server) getAccount(ctx *gin.Context) {
 	ctx.JSON(http.StatusOK, account)
 }
 
-// ListAccountRequest is the request body for listAccount API.
-type ListAccountRequest struct {
+// listAccountsRequest is the request body for listAccount API.
+type listAccountsRequest struct {
 	PageID   int32 `form:"page_id" binding:"required,min=1"`
 	PageSize int32 `form:"page_size" binding:"required,min=5,max=10"`
 }
 
 // listAccounts lists all accounts from the request.
 func (server *Server) listAccounts(ctx *gin.Context) {
-	var req ListAccountRequest
+	var req listAccountsRequest
 	if err := ctx.ShouldBindQuery(&req); err != nil {
 		ctx.JSON(http.StatusBadRequest, errorReponse(err))
 		return
