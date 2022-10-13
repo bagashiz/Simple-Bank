@@ -4,7 +4,7 @@ This is a simple bank application that is built using Golang, Postgresql, and Do
 
 ## Database Diagram
 
-![Simple Bank Database Diagram](./assets/simple-bank-diagram.jpg "Simple Bank Database Diagram")
+![Simple Bank Database Diagram](./assets/simple-bank-diagram.png "Simple Bank Database Diagram")
 
 ## Dependencies
 
