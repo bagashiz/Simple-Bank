@@ -1,7 +1,11 @@
 package api
 
 import (
+	"fmt"
+
 	db "github.com/bagashiz/Simple-Bank/db/sqlc"
+	"github.com/bagashiz/Simple-Bank/token"
+	"github.com/bagashiz/Simple-Bank/util"
 	"github.com/gin-gonic/gin"
 	"github.com/gin-gonic/gin/binding"
 	"github.com/go-playground/validator/v10"
@@ -9,13 +13,23 @@ import (
 
 // Server serves HTTP requests for banking service.
 type Server struct {
-	store  db.Store
-	router *gin.Engine
+  config     util.Config
+	store      db.Store
+  tokenMaker token.Maker
+	router     *gin.Engine
 }
 
 // NewServer creates a new HTTP server and setup routing.
-func NewServer(store db.Store) *Server {
-	server := &Server{store: store}
+func NewServer(config util.Config, store db.Store) (*Server, error) {
+  tokenMaker, err := token.NewPasetoMaker(config.TokenSymmetricKey)
+  if err != nil {
+    return nil, fmt.Errorf("cannot create token master: %v", err)
+  }
+	server := &Server{
+    config:     config,
+    store:      store,
+    tokenMaker: tokenMaker,
+  }
 	router := gin.Default()
 
 	if v, ok := binding.Validator.Engine().(*validator.Validate); ok {
@@ -31,7 +45,7 @@ func NewServer(store db.Store) *Server {
 
 	server.router = router
 
-	return server
+	return server, nil
 }
 
 // Start runs the HTTP server on a specific address.
