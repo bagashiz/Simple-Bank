@@ -17,6 +17,8 @@ This is a simple bank application that is built using Golang, Postgresql, and Do
 - [lib/pq](https://github.com/lib/pq)
 - [viper](https://github.com/spf13/viper)
 - [GoMock](https://github.com/golang/mock)
+- [JWT](https://github.com/golang-jwt/jwt)
+- [PASETO](https://github.com/o1egl/paseto)
 
 ## Learning and Reference Source
 
