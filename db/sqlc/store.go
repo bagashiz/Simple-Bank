@@ -9,7 +9,7 @@ import (
 // Store provides all functions to execute db queries and transactions
 type Store interface {
 	Querier
-	TransferTx(ctx context.Context, arg CreateTransferParams) (TransferTxResult, error)
+	TransferTx(ctx context.Context, arg TransferTxParams) (TransferTxResult, error)
 }
 
 // SQLStore provides all functions to execute SQL queries and transactions
@@ -66,7 +66,7 @@ type TransferTxResult struct {
 
 // TransferTx performs a money transfer from one account to another
 // It creates a transfer record, add account entries, and updates account balances within a database transaction
-func (store *SQLStore) TransferTx(ctx context.Context, arg CreateTransferParams) (TransferTxResult, error) {
+func (store *SQLStore) TransferTx(ctx context.Context, arg TransferTxParams) (TransferTxResult, error) {
 	var result TransferTxResult
 
 	err := store.execTx(ctx, func(q *Queries) error {
