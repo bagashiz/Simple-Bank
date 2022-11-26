@@ -7,8 +7,8 @@ import (
 	"net/http"
 
 	db "github.com/bagashiz/Simple-Bank/db/sqlc"
-	"github.com/gin-gonic/gin"
 	"github.com/bagashiz/Simple-Bank/token"
+	"github.com/gin-gonic/gin"
 )
 
 // transferRequest is the request body for createTransfer API.
@@ -27,29 +27,29 @@ func (server *Server) createTransfer(ctx *gin.Context) {
 		return
 	}
 
-  fromAccount, valid := server.validAccount(ctx, req.FromAccountID, req.Currency) 
+	fromAccount, valid := server.validAccount(ctx, req.FromAccountID, req.Currency)
 	if !valid {
 		return
 	}
 
-  authPayload := ctx.MustGet(authorizationPayloadKey).(*token.Payload)
-  if fromAccount.Owner != authPayload.Username {
-    err := errors.New("from account does not belong to the authenticated user")
-    ctx.JSON(http.StatusUnauthorized, errorReponse(err))
-    return
-  }
+	authPayload := ctx.MustGet(authorizationPayloadKey).(*token.Payload)
+	if fromAccount.Owner != authPayload.Username {
+		err := errors.New("from account does not belong to the authenticated user")
+		ctx.JSON(http.StatusUnauthorized, errorReponse(err))
+		return
+	}
 
-  _, valid = server.validAccount(ctx, req.ToAccountID, req.Currency) 
+	_, valid = server.validAccount(ctx, req.ToAccountID, req.Currency)
 	if !valid {
 		return
 	}
-  
+
 	arg := db.TransferTxParams{
 		FromAccountID: req.FromAccountID,
 		ToAccountID:   req.ToAccountID,
 		Amount:        req.Amount,
 	}
-  
+
 	result, err := server.store.TransferTx(ctx, arg)
 	if err != nil {
 		ctx.JSON(http.StatusInternalServerError, errorReponse(err))

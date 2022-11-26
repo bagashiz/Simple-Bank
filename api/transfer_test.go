@@ -40,7 +40,7 @@ func TestTransferAPI(t *testing.T) {
 		buildStubs    func(store *mockdb.MockStore)
 		checkResponse func(recoder *httptest.ResponseRecorder)
 	}{
-    // case 1: successfully transfer amount of money.
+		// case 1: successfully transfer amount of money.
 		{
 			name: "OK",
 			body: gin.H{
@@ -54,13 +54,13 @@ func TestTransferAPI(t *testing.T) {
 			},
 			buildStubs: func(store *mockdb.MockStore) {
 				store.EXPECT().
-          GetAccount(gomock.Any(), gomock.Eq(account1.ID)).
-          Times(1).
-          Return(account1, nil)
+					GetAccount(gomock.Any(), gomock.Eq(account1.ID)).
+					Times(1).
+					Return(account1, nil)
 				store.EXPECT().
-          GetAccount(gomock.Any(), gomock.Eq(account2.ID)).
-          Times(1).
-          Return(account2, nil)
+					GetAccount(gomock.Any(), gomock.Eq(account2.ID)).
+					Times(1).
+					Return(account2, nil)
 
 				arg := db.TransferTxParams{
 					FromAccountID: account1.ID,
@@ -68,14 +68,14 @@ func TestTransferAPI(t *testing.T) {
 					Amount:        amount,
 				}
 				store.EXPECT().
-          TransferTx(gomock.Any(), gomock.Eq(arg)).
-          Times(1)
+					TransferTx(gomock.Any(), gomock.Eq(arg)).
+					Times(1)
 			},
 			checkResponse: func(recorder *httptest.ResponseRecorder) {
 				require.Equal(t, http.StatusOK, recorder.Code)
 			},
 		},
-    // case 2: Unauthorized user attempting to transfer money.
+		// case 2: Unauthorized user attempting to transfer money.
 		{
 			name: "UnauthorizedUser",
 			body: gin.H{
@@ -89,21 +89,21 @@ func TestTransferAPI(t *testing.T) {
 			},
 			buildStubs: func(store *mockdb.MockStore) {
 				store.EXPECT().
-          GetAccount(gomock.Any(), gomock.Eq(account1.ID)).
-          Times(1).
-          Return(account1, nil)
+					GetAccount(gomock.Any(), gomock.Eq(account1.ID)).
+					Times(1).
+					Return(account1, nil)
 				store.EXPECT().
-          GetAccount(gomock.Any(), gomock.Eq(account2.ID)).
-          Times(0)
+					GetAccount(gomock.Any(), gomock.Eq(account2.ID)).
+					Times(0)
 				store.EXPECT().
-          TransferTx(gomock.Any(), gomock.Any()).
-          Times(0)
+					TransferTx(gomock.Any(), gomock.Any()).
+					Times(0)
 			},
 			checkResponse: func(recorder *httptest.ResponseRecorder) {
 				require.Equal(t, http.StatusUnauthorized, recorder.Code)
 			},
 		},
-    // case 3: no authorization token made.
+		// case 3: no authorization token made.
 		{
 			name: "NoAuthorization",
 			body: gin.H{
@@ -116,17 +116,17 @@ func TestTransferAPI(t *testing.T) {
 			},
 			buildStubs: func(store *mockdb.MockStore) {
 				store.EXPECT().
-          GetAccount(gomock.Any(), gomock.Any()).
-          Times(0)
+					GetAccount(gomock.Any(), gomock.Any()).
+					Times(0)
 				store.EXPECT().
-          TransferTx(gomock.Any(), gomock.Any()).
-          Times(0)
+					TransferTx(gomock.Any(), gomock.Any()).
+					Times(0)
 			},
 			checkResponse: func(recorder *httptest.ResponseRecorder) {
 				require.Equal(t, http.StatusUnauthorized, recorder.Code)
 			},
 		},
-    // case 4: from account does not exist.
+		// case 4: from account does not exist.
 		{
 			name: "FromAccountNotFound",
 			body: gin.H{
@@ -140,21 +140,21 @@ func TestTransferAPI(t *testing.T) {
 			},
 			buildStubs: func(store *mockdb.MockStore) {
 				store.EXPECT().
-          GetAccount(gomock.Any(), gomock.Eq(account1.ID)).
-          Times(1).
-          Return(db.Account{}, sql.ErrNoRows)
+					GetAccount(gomock.Any(), gomock.Eq(account1.ID)).
+					Times(1).
+					Return(db.Account{}, sql.ErrNoRows)
 				store.EXPECT().
-          GetAccount(gomock.Any(), gomock.Eq(account2.ID)).
-          Times(0)
+					GetAccount(gomock.Any(), gomock.Eq(account2.ID)).
+					Times(0)
 				store.EXPECT().
-          TransferTx(gomock.Any(), gomock.Any()).
-          Times(0)
+					TransferTx(gomock.Any(), gomock.Any()).
+					Times(0)
 			},
 			checkResponse: func(recorder *httptest.ResponseRecorder) {
 				require.Equal(t, http.StatusNotFound, recorder.Code)
 			},
 		},
-    // case 5: to account does not exist.
+		// case 5: to account does not exist.
 		{
 			name: "ToAccountNotFound",
 			body: gin.H{
@@ -168,22 +168,22 @@ func TestTransferAPI(t *testing.T) {
 			},
 			buildStubs: func(store *mockdb.MockStore) {
 				store.EXPECT().
-          GetAccount(gomock.Any(), gomock.Eq(account1.ID)).
-          Times(1).
-          Return(account1, nil)
+					GetAccount(gomock.Any(), gomock.Eq(account1.ID)).
+					Times(1).
+					Return(account1, nil)
 				store.EXPECT().
-          GetAccount(gomock.Any(), gomock.Eq(account2.ID)).
-          Times(1).
-          Return(db.Account{}, sql.ErrNoRows)
+					GetAccount(gomock.Any(), gomock.Eq(account2.ID)).
+					Times(1).
+					Return(db.Account{}, sql.ErrNoRows)
 				store.EXPECT().
-          TransferTx(gomock.Any(), gomock.Any()).
-          Times(0)
+					TransferTx(gomock.Any(), gomock.Any()).
+					Times(0)
 			},
 			checkResponse: func(recorder *httptest.ResponseRecorder) {
 				require.Equal(t, http.StatusNotFound, recorder.Code)
 			},
 		},
-    // case 6: from account currency does not match.
+		// case 6: from account currency does not match.
 		{
 			name: "FromAccountCurrencyMismatch",
 			body: gin.H{
@@ -197,21 +197,21 @@ func TestTransferAPI(t *testing.T) {
 			},
 			buildStubs: func(store *mockdb.MockStore) {
 				store.EXPECT().
-          GetAccount(gomock.Any(), gomock.Eq(account3.ID)).
-          Times(1).
-          Return(account3, nil)
+					GetAccount(gomock.Any(), gomock.Eq(account3.ID)).
+					Times(1).
+					Return(account3, nil)
 				store.EXPECT().
-          GetAccount(gomock.Any(), gomock.Eq(account2.ID)).
-          Times(0)
+					GetAccount(gomock.Any(), gomock.Eq(account2.ID)).
+					Times(0)
 				store.EXPECT().
-          TransferTx(gomock.Any(), gomock.Any()).
-          Times(0)
+					TransferTx(gomock.Any(), gomock.Any()).
+					Times(0)
 			},
 			checkResponse: func(recorder *httptest.ResponseRecorder) {
 				require.Equal(t, http.StatusBadRequest, recorder.Code)
 			},
 		},
-    // case 7: to account currency does not match.
+		// case 7: to account currency does not match.
 		{
 			name: "ToAccountCurrencyMismatch",
 			body: gin.H{
@@ -225,22 +225,22 @@ func TestTransferAPI(t *testing.T) {
 			},
 			buildStubs: func(store *mockdb.MockStore) {
 				store.EXPECT().
-          GetAccount(gomock.Any(), gomock.Eq(account1.ID)).
-          Times(1).
-          Return(account1, nil)
+					GetAccount(gomock.Any(), gomock.Eq(account1.ID)).
+					Times(1).
+					Return(account1, nil)
 				store.EXPECT().
-          GetAccount(gomock.Any(), gomock.Eq(account3.ID)).
-          Times(1).
-          Return(account3, nil)
+					GetAccount(gomock.Any(), gomock.Eq(account3.ID)).
+					Times(1).
+					Return(account3, nil)
 				store.EXPECT().
-          TransferTx(gomock.Any(), gomock.Any()).
-          Times(0)
+					TransferTx(gomock.Any(), gomock.Any()).
+					Times(0)
 			},
 			checkResponse: func(recorder *httptest.ResponseRecorder) {
 				require.Equal(t, http.StatusBadRequest, recorder.Code)
 			},
 		},
-    // case 8: using invalid currency.
+		// case 8: using invalid currency.
 		{
 			name: "InvalidCurrency",
 			body: gin.H{
@@ -254,17 +254,17 @@ func TestTransferAPI(t *testing.T) {
 			},
 			buildStubs: func(store *mockdb.MockStore) {
 				store.EXPECT().
-          GetAccount(gomock.Any(), gomock.Any()).
-          Times(0)
+					GetAccount(gomock.Any(), gomock.Any()).
+					Times(0)
 				store.EXPECT().
-          TransferTx(gomock.Any(), gomock.Any()).
-          Times(0)
+					TransferTx(gomock.Any(), gomock.Any()).
+					Times(0)
 			},
 			checkResponse: func(recorder *httptest.ResponseRecorder) {
 				require.Equal(t, http.StatusBadRequest, recorder.Code)
 			},
 		},
-    // case 9: amount below 0.
+		// case 9: amount below 0.
 		{
 			name: "NegativeAmount",
 			body: gin.H{
@@ -278,17 +278,17 @@ func TestTransferAPI(t *testing.T) {
 			},
 			buildStubs: func(store *mockdb.MockStore) {
 				store.EXPECT().
-          GetAccount(gomock.Any(), gomock.Any()).
-          Times(0)
+					GetAccount(gomock.Any(), gomock.Any()).
+					Times(0)
 				store.EXPECT().
-          TransferTx(gomock.Any(), gomock.Any()).
-          Times(0)
+					TransferTx(gomock.Any(), gomock.Any()).
+					Times(0)
 			},
 			checkResponse: func(recorder *httptest.ResponseRecorder) {
 				require.Equal(t, http.StatusBadRequest, recorder.Code)
 			},
 		},
-    // case 10: error when trying to get account.
+		// case 10: error when trying to get account.
 		{
 			name: "GetAccountError",
 			body: gin.H{
@@ -302,18 +302,18 @@ func TestTransferAPI(t *testing.T) {
 			},
 			buildStubs: func(store *mockdb.MockStore) {
 				store.EXPECT().
-          GetAccount(gomock.Any(), gomock.Any()).
-          Times(1).
-          Return(db.Account{}, sql.ErrConnDone)
+					GetAccount(gomock.Any(), gomock.Any()).
+					Times(1).
+					Return(db.Account{}, sql.ErrConnDone)
 				store.EXPECT().
-          TransferTx(gomock.Any(), gomock.Any()).
-          Times(0)
+					TransferTx(gomock.Any(), gomock.Any()).
+					Times(0)
 			},
 			checkResponse: func(recorder *httptest.ResponseRecorder) {
 				require.Equal(t, http.StatusInternalServerError, recorder.Code)
 			},
 		},
-    // case 11: error when doing transfer transaction.
+		// case 11: error when doing transfer transaction.
 		{
 			name: "TransferTxError",
 			body: gin.H{
@@ -363,4 +363,3 @@ func TestTransferAPI(t *testing.T) {
 		})
 	}
 }
-
