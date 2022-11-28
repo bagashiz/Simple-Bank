@@ -13,7 +13,7 @@ jobs:
 
     services:
       postgres:
-        image: postgres
+        image: postgres:15-alpine3.16
         env:
           POSTGRES_USER: root
           POSTGRES_PASSWORD: password
