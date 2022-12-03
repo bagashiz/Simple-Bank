@@ -8,7 +8,7 @@ This is a simple bank application that is built using Golang, Postgresql, and Do
 
 ## Dependencies
 
-- Go version 1.18.6 or later
+- Go version 1.18 or later
 - [Docker](https://www.docker.com/)
 - [Postgresql Docker Image](https://hub.docker.com/_/postgres)
 - [SQLC](https://github.com/kyleconroy/sqlc)
