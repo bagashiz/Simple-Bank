@@ -1,5 +1,9 @@
+-- SQL dump generated using DBML (dbml-lang.org)
+-- Database: PostgreSQL
+-- Generated at: 2022-12-04T03:20:06.551Z
+
 CREATE TABLE "accounts" (
-  "id" bigserial PRIMARY KEY,
+  "id" BIGSERIAL PRIMARY KEY,
   "owner" varchar NOT NULL,
   "balance" bigint NOT NULL,
   "currency" varchar NOT NULL,
@@ -16,14 +20,14 @@ CREATE TABLE "users" (
 );
 
 CREATE TABLE "entries" (
-  "id" bigserial PRIMARY KEY,
+  "id" BIGSERIAL PRIMARY KEY,
   "account_id" bigint NOT NULL,
   "amount" bigint NOT NULL,
   "created_at" timestamptz NOT NULL DEFAULT (now())
 );
 
 CREATE TABLE "transfers" (
-  "id" bigserial PRIMARY KEY,
+  "id" BIGSERIAL PRIMARY KEY,
   "from_account_id" bigint NOT NULL,
   "to_account_id" bigint NOT NULL,
   "amount" bigint NOT NULL,
@@ -31,14 +35,14 @@ CREATE TABLE "transfers" (
 );
 
 CREATE TABLE "sessions" (
-    "id" uuid PRIMARY KEY,
-    "username" varchar NOT NULL,
-    "refresh_token" varchar NOT NULL,
-    "user_agent" varchar NOT NULL,
-    "client_ip" varchar UNIQUE NOT NULL,
-    "is_blocked" boolean NOT NULL DEFAULT false,
-    "expires_at" timestamptz NOT NULL,
-    "created_at" timestamptz NOT NULL DEFAULT (now())
+  "id" uuid PRIMARY KEY,
+  "username" varchar NOT NULL,
+  "refresh_token" varchar NOT NULL,
+  "user_agent" varchar NOT NULL,
+  "client_ip" varchar UNIQUE NOT NULL,
+  "is_blocked" boolean NOT NULL DEFAULT false,
+  "expires_at" timestamptz NOT NULL,
+  "created_at" timestamptz NOT NULL DEFAULT (now())
 );
 
 CREATE INDEX ON "accounts" ("owner");

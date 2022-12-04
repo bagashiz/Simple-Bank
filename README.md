@@ -6,6 +6,8 @@ This is a simple bank application that is built using Golang, Postgresql, and Do
 
 ![Simple Bank Database Diagram](./assets/simple-bank-diagram.png "Simple Bank Database Diagram")
 
+For more information about the database, please refer to the [database documentation site](https://dbdocs.io/bagashiz/simple_bank).
+
 ## Dependencies
 
 - Go version 1.18 or later
