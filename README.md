@@ -22,6 +22,7 @@ For more information about the database, please refer to the [database documenta
 - [JWT](https://github.com/golang-jwt/jwt)
 - [PASETO](https://github.com/o1egl/paseto)
 - [protoc](https://grpc.io/docs/protoc-installation/#install-pre-compiled-binaries-any-os)
+- [grpc-gateway](https://github.com/grpc-ecosystem/grpc-gateway)
 
 ## Learning and Reference Sources
 
