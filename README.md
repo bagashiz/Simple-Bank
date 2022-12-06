@@ -23,6 +23,7 @@ For more information about the database, please refer to the [database documenta
 - [PASETO](https://github.com/o1egl/paseto)
 - [protoc](https://grpc.io/docs/protoc-installation/#install-pre-compiled-binaries-any-os)
 - [grpc-gateway](https://github.com/grpc-ecosystem/grpc-gateway)
+- [statik](https://github.com/rakyll/statik)
 
 ## Learning and Reference Sources
 
