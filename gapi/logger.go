@@ -44,22 +44,26 @@ func GrpcLogger(
 	return result, err
 }
 
+// ResponseRecorder is a HTTP response recorder that records the status code and body
 type ResponseRecorder struct {
 	http.ResponseWriter
 	StatusCode int
 	Body       []byte
 }
 
+// WriteHeader overrides the default WriteHeader method to record the status code
 func (rec *ResponseRecorder) WriteHeader(statusCode int) {
 	rec.StatusCode = statusCode
 	rec.ResponseWriter.WriteHeader(statusCode)
 }
 
+// Write overrides the default Write method to record the body
 func (rec *ResponseRecorder) Write(body []byte) (int, error) {
 	rec.Body = body
 	return rec.ResponseWriter.Write(body)
 }
 
+// HttpLogger is a HTTP middleware that logs the request and response to the console
 func HttpLogger(handler http.Handler) http.Handler {
 	return http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 		startTime := time.Now()
