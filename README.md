@@ -1,6 +1,6 @@
 # Description
 
-This is a simple bank application that is built using Golang, Postgresql, and Docker. This application is built based on the [Backend Master Class [Golang + Postgres + Kubernetes + gRPC]](https://www.udemy.com/course/backend-master-class-golang-postgresql-kubernetes/) course.
+This is a simple bank application that is built using Golang, Postgresql, gRPC, and Docker. This application is built based on the [Backend Master Class [Golang + Postgres + Kubernetes + gRPC]](https://www.udemy.com/course/backend-master-class-golang-postgresql-kubernetes/) course.
 
 ## Database Diagram
 
@@ -21,6 +21,9 @@ For more information about the database, please refer to the [database documenta
 - [Gomock](https://github.com/golang/mock)
 - [JWT](https://github.com/golang-jwt/jwt)
 - [PASETO](https://github.com/o1egl/paseto)
+- [protoc](https://grpc.io/docs/protoc-installation/#install-pre-compiled-binaries-any-os)
+- [grpc-gateway](https://github.com/grpc-ecosystem/grpc-gateway)
+- [statik](https://github.com/rakyll/statik)
 
 ## Learning and Reference Sources
 
@@ -30,3 +33,4 @@ For more information about the database, please refer to the [database documenta
 - [Postgresql Documentation](https://www.postgresql.org/docs/current/)
 - [SQLC Documentation](https://docs.sqlc.dev/en/latest/)
 - [Gin Gonic Documentation](https://gin-gonic.com/docs/)
+- [gRPC Documentation](https://grpc.io/docs/)
