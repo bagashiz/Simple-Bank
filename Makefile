@@ -1,7 +1,7 @@
 DB_URL=postgresql://root:password@localhost:5432/simple_bank?sslmode=disable
 
 postgres:
-	docker run -h postgres-server --name postgres-server -p 5432:5432 -e POSTGRES_USER=root -e POSTGRES_PASSWORD=password -d postgres:15-alpine3.16
+	docker run -h postgres-server --name postgres-server -p 5432:5432 -e POSTGRES_USER=root -e POSTGRES_PASSWORD=password -d postgres:15-alpine3.17
 	
 createdb:
 	docker exec -ti postgres-server createdb --username=root --owner=root simple_bank
